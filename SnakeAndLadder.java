@@ -1,55 +1,71 @@
+
 package snakesAndLadder;
 
-public class WinPositionUC4 {
-	 public static final int NO_PLAY = 0;
-     public static final int LADDER = 1;
-     public static final int SNAKE = 2;
-     public static final int WINNING_POSITION = 100;
+import java.util.Random;
+
+public class SnakeAndLadderUC5 {
+	     
 	
-     public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	   	  int Position = 0;
-	      int Roll = 0;
-	      int Start = 0;
-	      int Reach = 0;
+		public static final int No_Play=1;
+		public static final int Ladder=2;
+		public static final int Snake=3;
+		public static final int Win_position=100;
+		public static final int Position_check = 0;
+		public static void main(String[] args) 
+		{
+			System.out.println("Welcome to SnakeAndLadder Game");
 
-	      //int Value =(int) Math.floor((Math.random() * 6) + 1 );
-	      //System.out.println("Die Number Value: " + Value);
+			int position = 0;
+			System.out.println("Player start position : " + position);
+                Random random = new Random();
 
-	      //for (int Reach = 0; Reach < WINNING_POSITION; Reach++) {
-	        while (Reach <= WINNING_POSITION) {
-	         Reach++;
+			int dice = 0;
+			while (true) {
+	    		dice = random.nextInt(6);
+	    		if(dice != 0) break;
+			} System.out.println("NUmber of dice: " + dice);
 
-	         int Value =(int) Math.floor((Math.random() * 6) + 1 );
-	         System.out.println("Die Number Value: " + Value);
+			//options
+			while(position < Win_position){
+                Random op = new Random();
+		        int option = 0;
+			while (true) {
+	    		option = op.nextInt(4);
+	    		if(option != 0) break;
+	    		}
+			System.out.println("*****OPTIONS*****");
+			System.out.println("Options : " + option);
+		
 
-	         int option =(int) Math.floor((Math.random() * 10) % 3 );
-	         System.out.println("option number: " + option);
+			switch (option) {
+				case No_Play:
+					System.out.println("Player stays in the same position : " + position);
+					break;
 
-	         switch (option) {
-	             case NO_PLAY:
-	                   Roll = 0;
-	                   break;
-	             case LADDER:
-	                   Roll = + Value;
-	                   break;
-	             case SNAKE:
-	                   Roll = -Value;
-	         }
-	        Position = (Position + Roll);
-	        if (Position < 0) {
-	             System.out.println("Current Position: " + Start );
-	             Reach = Start;
-	             System.out.println("Reached: " + Reach);
-	        }
-	        else {
-	             System.out.println("Current Position: " + Position);
-	             Reach = Position;
-	             System.out.println("Reached: " + Reach);
-	        }
-	     }
-	        //Reach = Position;
-	        System.out.println("Win: " + Reach);
+				case Ladder:
+					position += dice;
+					if((position + dice) > Win_position)
+						position = Win_position;
+					 
+					else
+						position += dice;
+				    System.out.println("Player moves ahead by : " + position);
+					break;
+
+				    case Snake:
+					position -= dice;
+					if ((position - dice) < Position_check){
+	                position = Position_check;
+			   }
+					System.out.println("Player moves behind by : " + position);
+					break;
+
+				default:
+					System.out.println("Enter  value");
+		   break;
+			}
+		}
 	}
-}
+	}
+
 
